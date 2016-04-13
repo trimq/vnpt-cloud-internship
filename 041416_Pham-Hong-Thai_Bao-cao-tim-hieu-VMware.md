@@ -3,6 +3,8 @@
 ## Mục lục
 ###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình cho các card mạng](#add_nic)
 ###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh)](#set_ip)
+####a. Cấu hình bằng cách chỉnh sửa file /etc/network/interfaces
+####b. Cấu hình IP tĩnh sử dụng lệnh:
 
 ## Ghi chú
 * VMWare trong bài lab là phiên bản VMware Workstation 12
@@ -47,7 +49,7 @@
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPQ1ZLRUFUYVVkeEU)
 
 ###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh)](https://github.com/thaihust/vnpt-cloud-internship/blob/master/041416_Pham-Hong-Thai_Bao-cao-tim-hieu-VMware.md#set_ip)
-####a. Cấu hình bằng cách chỉnh sửa file /etc/network/interfaces:
+####a. Cấu hình bằng cách chỉnh sửa file /etc/network/interfaces
 - Mặc định ban đầu khi cấu hình card mạng cho máy ảo, các máy ảo được cấp IP động nhờ dhcp server (ở chế độ bridge thì card eth0 chế độ bridge chung dhcp server với máy thật, còn chế độ host-only sẽ là 1 dhcp server ảo). Dùng vi mở file cấu hình các interfaces để kiểm tra: `sudo vi /etc/network/interfaces`:
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPOHN5ZjdyZWRCNkE)
 
