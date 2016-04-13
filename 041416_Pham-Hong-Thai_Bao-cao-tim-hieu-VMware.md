@@ -1,7 +1,7 @@
 # Tìm hiểu VMWare, cấu hình IP và card mạng cho máy ảo Ubuntu server
 
 ## Mục lục
-###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình](#add_nic)
+###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình cho các card mạng](#add_nic)
 ###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh)](#set_ip)
 
 ## Ghi chú
@@ -10,7 +10,7 @@
 * Trong bài lab có sử dụng ssh client có sẵn của Ubuntu
 
 ---
-###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình](#add_nic)
+###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình cho các card mạng](https://github.com/thaihust/vnpt-cloud-internship/blob/master/041416_Pham-Hong-Thai_Bao-cao-tim-hieu-VMware.md#add_nic)
 - Hiện tại VMware sử dụng để lab đang có 3 NIC:  vmnet8 (NAT), vmnet0 (bridged), vmnet1 (host-only)   
 - Tiến hành add thêm 2 NIC chế độ Host-only là vmnet2 và vmnet3 như sau:
 	+ Add NIC vmnet2 chế độ host-only với địa chỉ: 172.31.0.0/24
@@ -33,12 +33,12 @@
 - Sau đó bật máy ảo lên và kiểm tra xem máy ảo đã nhận đầy đủ card mạng chưa. Mặc định ban đầu khi cài đặt, máy ảo thiết lập chỉ có 1 card mạng (eth0) chế độ Bridge nên khi kiểm tra chỉ thấy địa chỉ 192.168.1.42 tương ứng chế độ bridge:
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPNDJrd0ZFYjJSbDA)
 
-	**Chú ý**
+	**Chú ý:**
 	Để kiểm tra các interface có thể sử dụng lệnh `ifconfig` hoặc `landscape-sysinfo` (mặc định khi cài ubuntu server có cài đặt gói landscape-common nên có thể sử dụng lệnh này)
 - Để xin cấp IP cho hai card mạng mới (eth1 và eth2) trên máy ảo, sử dụng hai lệnh `dhclient eth1` và `dhclient eth2` . Tiếp đó, gõ lệnh `landscape-sysinfo` kiểm tra lại xem máy ảo đã được cấp IP cho hai card mới chưa: 	
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPQ1ZLRUFUYVVkeEU)
 
-###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh)](#set_ip)
+###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh)](https://github.com/thaihust/vnpt-cloud-internship/blob/master/041416_Pham-Hong-Thai_Bao-cao-tim-hieu-VMware.md#set_ip)
 ####a. Cấu hình bằng cách chỉnh sửa file /etc/network/interfaces:
 - Mặc định ban đầu khi cấu hình card mạng cho máy ảo, các máy ảo được cấp IP động nhờ dhcp server (ở chế độ bridge thì card eth0 chế độ bridge chung dhcp server với máy thật, còn chế độ host-only sẽ là 1 dhcp server ảo). Dùng vi mở file cấu hình các interfaces để kiểm tra: `sudo vi /etc/network/interfaces` (để edit file dùng vi, nhấn phím *i* để chuyển sang mode insert):
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPOHN5ZjdyZWRCNkE)
