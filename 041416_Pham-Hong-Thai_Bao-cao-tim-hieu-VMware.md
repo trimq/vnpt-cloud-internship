@@ -1,10 +1,10 @@
 # Tìm hiểu VMWare, cấu hình IP và card mạng cho máy ảo Ubuntu server
 
 ## Mục lục
-###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình cho các card mạng](#add_nic)
-###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh)](#set_ip)
-####a. Cấu hình bằng cách chỉnh sửa file /etc/network/interfaces
-####b. Cấu hình IP tĩnh sử dụng lệnh:
+###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình cho các card mạng](#)
+###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh](#)
+####[2.1. Cấu hình bằng cách chỉnh sửa file /etc/network/interfaces](#)
+####[2.2. Cấu hình IP tĩnh sử dụng lệnh](#)
 
 ## Ghi chú
 * VMWare trong bài lab là phiên bản VMware Workstation 12
@@ -12,7 +12,7 @@
 * Trong bài lab có sử dụng ssh client có sẵn của Ubuntu
 
 ---
-###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình cho các card mạng](https://github.com/thaihust/vnpt-cloud-internship/blob/master/041416_Pham-Hong-Thai_Bao-cao-tim-hieu-VMware.md#add_nic)
+###[1. Add 2 card mạng trên máy Ubuntu Server và cấu hình cho các card mạng](#)
 - Hiện tại VMware sử dụng để lab đang có 3 NIC:  vmnet8 (NAT), vmnet0 (bridged), vmnet1 (host-only)   
 - Tiến hành add thêm 2 NIC chế độ Host-only là vmnet2 và vmnet3 như sau:
 	+ Add NIC vmnet2 chế độ host-only với địa chỉ: 172.31.0.0/24
@@ -48,8 +48,8 @@
 - Để xin cấp IP cho hai card mạng mới (eth1 và eth2) trên máy ảo, sử dụng hai lệnh `dhclient eth1` và `dhclient eth2` . Tiếp đó, gõ lệnh `landscape-sysinfo` kiểm tra lại xem máy ảo đã được cấp IP cho hai card mới chưa: 
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPQ1ZLRUFUYVVkeEU)
 
-###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh)](https://github.com/thaihust/vnpt-cloud-internship/blob/master/041416_Pham-Hong-Thai_Bao-cao-tim-hieu-VMware.md#set_ip)
-####a. Cấu hình bằng cách chỉnh sửa file /etc/network/interfaces
+###[2. Thiết lập IP tĩnh và IP động cho máy ảo (chỉnh sửa file và dùng câu lệnh)](#)
+####[2.1. Cấu hình bằng cách chỉnh sửa file /etc/network/interfaces](#)
 - Mặc định ban đầu khi cấu hình card mạng cho máy ảo, các máy ảo được cấp IP động nhờ dhcp server (ở chế độ bridge thì card eth0 chế độ bridge chung dhcp server với máy thật, còn chế độ host-only sẽ là 1 dhcp server ảo). Dùng vi mở file cấu hình các interfaces để kiểm tra: `sudo vi /etc/network/interfaces`:
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPOHN5ZjdyZWRCNkE)
 
@@ -86,7 +86,7 @@
 
 - Khởi động lại toàn bộ các card mạng: `sudo ifdown -a && sudo ifup -a`
 
-####b. Cấu hình IP tĩnh sử dụng lệnh:
+####[2.2. Cấu hình IP tĩnh sử dụng lệnh](#)
 - Để cấu hình IP tĩnh cho máy ảo, ngoài cách chỉnh sửa file /etc/network/interfaces, ta có thể sử dụng lệnh để cấu hình (cấu hình này sẽ bị mất khi khởi động lại máy). Trước hết cấu hình cho eth0:
 
 	```sh
