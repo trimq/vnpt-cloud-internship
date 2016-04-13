@@ -28,8 +28,8 @@
  		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPWFhJdlNxeVE5TVU)
  	+ Tiến hành add thêm 1 card chế độ host-only và chọn /dev/vmnet3
  		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPM1J2UzFuSnd4akU)
-- Kiểm tra lại 3 card mạng của máy ảo Ubuntu
-		
+- Kiểm tra lại 3 card mạng của máy ảo Ubuntu:
+		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPNmdnYnY5ZldKdG8)
 - Sau đó bật máy ảo lên và kiểm tra xem máy ảo đã nhận đầy đủ card mạng chưa. Mặc định ban đầu khi cài đặt, máy ảo thiết lập chỉ có 1 card mạng (eth0) chế độ Bridge nên khi kiểm tra chỉ thấy địa chỉ 192.168.1.42 tương ứng chế độ bridge:
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPNDJrd0ZFYjJSbDA)
 
@@ -43,6 +43,7 @@
 - Mặc định ban đầu khi cấu hình card mạng cho máy ảo, các máy ảo được cấp IP động nhờ dhcp server (ở chế độ bridge thì card eth0 chế độ bridge chung dhcp server với máy thật, còn chế độ host-only sẽ là 1 dhcp server ảo). Dùng vi mở file cấu hình các interfaces để kiểm tra: `sudo vi /etc/network/interfaces` (để edit file dùng vi, nhấn phím *i* để chuyển sang mode insert):
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPOHN5ZjdyZWRCNkE)
 - Ta tiến hành cấu hình IP tĩnh cho card eth0 trong file *interfaces* như sau:
+
 	```sh
 		auto eth0
 		iface eth0 inet static
@@ -57,11 +58,11 @@
 	Trong bài lab sử dụng ssh client có sẵn của hệ điều hành chủ (Ubuntu Desktop 14.04) để ssh vào máy ảo Ubuntu server để tiến hành ping (do việc ping trong máy ảo ra internet tạo ra rất nhiều bản tin duplicate nên dễ gây rối mắt và khó quan sát)
 - Ping thử kết nối giữa máy host và máy ảo (máy ảo có 1 card chế độ bridge nên cùng mạng với máy thật): 
 	+ Từ máy ảo (địa chỉ 192.168.1.42 ping ra máy host có địa chỉ 192.168.1.87):
-		```sh
+		```
 			ping -c 4 192.167.1.87
 		```
 	+ Ping từ máy host sang máy ảo:
-		```sh
+		```
 			ping -c 4 192.168.1.42
 		```
 	+ Kết quả
@@ -72,6 +73,7 @@
 
 ####b. Cấu hình IP tĩnh sử dụng lệnh:
 - Để cấu hình IP tĩnh cho máy ảo, ngoài cách chỉnh sửa file /etc/network/interfaces, ta có thể sử dụng lệnh để cấu hình (cấu hình này sẽ bị mất khi khởi động lại máy). Trước hết cấu hình cho eth0:
+
 	```sh
 		ifconfig eth0 192.168.1.48 netmask 255.255.255.0
 		route add default gw 192.168.1.1
@@ -80,6 +82,7 @@
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPV2hiclVZN3l6UFE)
 
 - Sử dụng một máy ảo khác (tên mininet cũng chạy ubuntu server 14.04), có một card eth0 chế độ host-only vmnet2 (172.31.0.0), tức là nối chung 1 bridge ảo với máy Ubuntu-Internship đang xét. Giờ ta cũng tiến hành cấu hình IP tĩnh cho máy ảo này đổi địa chỉ từ 172.31.0.129 sang 172.31.0.155:
+
 	```sh
 		ifconfig eth0 172.31.0.155 netmask 255.255.255.0
 		route add default gw 172.31.0.155
