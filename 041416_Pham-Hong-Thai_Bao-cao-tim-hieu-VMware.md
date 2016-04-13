@@ -59,6 +59,7 @@
 		ipaddress 192.168.1.42/24
 		gateway 192.168.1.1
 	```
+	Minh họa
 		![alt text](https://drive.google.com/uc?id=0Bw96fRvq9ILPT1lRdWl4YmFFUUk)
 
 - Lưu file và thoát. Sau đó gõ lệnh `sudo ifdown -a && sudo ifup -a` để khởi động lại toàn bộ các card mạng. Tiến hành ping thử ra internet kiểm tra thông mạng `ping -c 4 google.com`
